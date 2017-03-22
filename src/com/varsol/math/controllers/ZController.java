@@ -13,7 +13,12 @@ public class ZController {
     }
 
     public static Integer POZ_Z_D(ZNumber number){
-        return null;
+        if (number.getsign() == -1)
+            return 1;
+        if ((number.getNumber().getElderPosition() == 1) && (number.getNumber().get(0) == 0))
+            return 0;
+        else
+        return 2;
     }
 
     public static ZNumber MUL_ZM_Z(ZNumber number){
