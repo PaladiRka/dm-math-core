@@ -13,6 +13,7 @@ public class ZController {
     }
 
     public static Integer POZ_Z_D(ZNumber number){
+        /*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
         if (number.getsign() == -1)
             return 1;
         if ((number.getNumber().getElderPosition() == 1) && (number.getNumber().get(0) == 0))
