@@ -14,12 +14,15 @@ public class ZController {
 
     public static Integer POZ_Z_D(ZNumber number){
         /*Определение положительности числа (2 - положительное, 0 — равное нулю, 1 - отрицательное)*/
-        if (number.getSign() == -1)
+        if (number.getSign() == -1){ // если отрицательное
             return 1;
-        if ((number.getNumber().getElderPosition() == 1) && (number.getNumber().get(0) == 0))
+        }
+        if ((number.getNumber().getElderPosition() == 1) && (number.getNumber().get(0) == 0)){ // если равно 0
             return 0;
-        else
+        }
+        else{ // если не отрицательное и не равно нулю => положительное
         return 2;
+        }
     }
 
     public static ZNumber MUL_ZM_Z(ZNumber number){
