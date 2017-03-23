@@ -54,17 +54,38 @@ public class ZController {
 
     public static ZNumber MUL_ZZ_Z(ZNumber first, ZNumber second) {
         //Умножение целых чисел
-        return null;
+        ZNumber result;
+        if ((first.getSign() == -1)^(second.getSign() == -1))
+            result.setSign(-1);
+        else
+            result.setSign(1);
+        result.getNumber(MUL_NN_N(first.getNumber(),second.getNumber()));
+            
+        return result;
     }
 
     public static NNumber DIV_ZZ_Z(ZNumber first, ZNumber second) {
         //Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
-        return null;
+        ZNumber result;
+        if ((first.getSign() == -1)^(second.getSign() == -1))
+            result.setSign(-1);
+        else
+            result.setSign(1);
+        result.getNumber(DIV_NN_N(first.getNumber(),second.getNumber()));
+            
+        return result;
     }
 
     public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
-        return null;
+                ZNumber result;
+        if ((first.getSign() == -1)^(second.getSign() == -1))
+            result.setSign(-1);
+        else
+            result.setSign(1);
+        result.getNumber(MOD_NN_N(first.getNumber(),second.getNumber()));
+            
+        return result;
     }
 
 }
