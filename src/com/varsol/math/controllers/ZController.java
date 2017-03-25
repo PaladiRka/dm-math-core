@@ -28,22 +28,29 @@ public class ZController {
 
     public static ZNumber MUL_ZM_Z(ZNumber number){
         //Умножение целого на (-1)
-        number.setSign(number.getSign()*(-1));
+        number.setSign(number.getSign()*(Integer)(-1));
         return number;
     }
 
     public static ZNumber TRANS_N_Z(NNumber number) {
         //Преобразование натурального в целое
-        return null;
+        ZNumber result;
+        result.setNumber(number);
+        result.setSign(1);
+        return result;
     }
 
     public static NNumber TRANS_Z_N(ZNumber number){
         //Преобразование целого неотрицательного в натуральное
-        return number.getNumber();
+        if (number.getSign() > (Integer) 0){
+           return number.getNumber(); 
+        }
+        return NULL;
     }
 
     public static ZNumber ADD_ZZ_Z(ZNumber first, ZNumber second){
-        //Сложение целых чисел        
+        //Сложение целых чисел   
+        
         return null;
     }
 
@@ -55,10 +62,12 @@ public class ZController {
     public static ZNumber MUL_ZZ_Z(ZNumber first, ZNumber second) {
         //Умножение целых чисел
         ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1))
+        if ((first.getSign() == -1)^(second.getSign() == -1)){
             result.setSign(-1);
-        else
+        }
+        else{
             result.setSign(1);
+        }
         result.getNumber(MUL_NN_N(first.getNumber(),second.getNumber()));
             
         return result;
@@ -67,10 +76,12 @@ public class ZController {
     public static NNumber DIV_ZZ_Z(ZNumber first, ZNumber second) {
         //Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
         ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1))
+        if ((first.getSign() == -1)^(second.getSign() == -1)){
             result.setSign(-1);
-        else
+        }
+        else{
             result.setSign(1);
+        }
         result.getNumber(DIV_NN_N(first.getNumber(),second.getNumber()));
             
         return result;
@@ -79,10 +90,12 @@ public class ZController {
     public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
                 ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1))
+        if ((first.getSign() == -1)^(second.getSign() == -1)){
             result.setSign(-1);
-        else
+        }
+        else{
             result.setSign(1);
+        }
         result.getNumber(MOD_NN_N(first.getNumber(),second.getNumber()));
             
         return result;
