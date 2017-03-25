@@ -44,14 +44,30 @@ public class ZController {
         //Преобразование целого неотрицательного в натуральное
         if (number.getSign() > (Integer) 0){
            return number.getNumber(); 
-        }
+        }else{
         return NULL;
+        }
     }
 
     public static ZNumber ADD_ZZ_Z(ZNumber first, ZNumber second){
         //Сложение целых чисел   
-        
-        return null;
+        ZNumber result;
+        result.setSign(1);
+        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){
+            result.setNumber(ADD_NN_N(first,second));
+            if (POZ_Z_D(first) == 2){
+                MUL_ZM_Z(result);
+            }
+        }else{
+                if (COM_NN_D(ABS_Z_N(first), ABS_Z_N(second)) < 2){ //Сделаем так что бы first было больше по модолю чем second
+                result = second;     // Так как result пока нам не нужно,
+                second = first;     // и что бы не заводить новую переменную
+                first = result;    // используем её как буфер обмена
+                }
+                result.setNumber(SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second)));  
+                result.setSign(first.getSign());
+            }
+        return result;
     }
 
     public static ZNumber SUB_ZZ_Z(ZNumber first, ZNumber second){
@@ -62,41 +78,36 @@ public class ZController {
     public static ZNumber MUL_ZZ_Z(ZNumber first, ZNumber second) {
         //Умножение целых чисел
         ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1)){
-            result.setSign(-1);
-        }
-        else{
+        result.setSign(1);
+        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
             result.setSign(1);
         }
-        result.getNumber(MUL_NN_N(first.getNumber(),second.getNumber()));
+        }
+        result.getNumber(MUL_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
             
         return result;
     }
 
-    public static NNumber DIV_ZZ_Z(ZNumber first, ZNumber second) {
-        //Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
-        ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1)){
-            result.setSign(-1);
-        }
-        else{
-            result.setSign(1);
-        }
-        result.getNumber(DIV_NN_N(first.getNumber(),second.getNumber()));
-            
+    public static NNumber DIV_ZZ_Z(ZNumber first, NNumber second) {
+        // Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
+        // Единственное что я не понимаю зачем Поздняков прописал, что к этому модолю нужен модуль добавление к натуральному числу единицы
+        // И кстати, по заданию мы получаем целое и натрульное, хотя судя по названию модуля получаем два целых...
+        NNumber result;
+        result.setNumber(DIV_NN_N(ABS_Z_N(first),ABS_Z_N(second)));           
         return result;
     }
 
     public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
+        //ОН НЕ ВЕРНЫЙ!!! ПОКА...
                 ZNumber result;
-        if ((first.getSign() == -1)^(second.getSign() == -1)){
-            result.setSign(-1);
-        }
-        else{
+        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){
             result.setSign(1);
         }
-        result.getNumber(MOD_NN_N(first.getNumber(),second.getNumber()));
+        else{
+            result.setSign(-1);
+        }
+        result.getNumber(MOD_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
             
         return result;
     }
