@@ -72,7 +72,26 @@ public class ZController {
 
     public static ZNumber SUB_ZZ_Z(ZNumber first, ZNumber second){
         //Вычитание целых чисел
-        return null;
+        // Полностью повторяем алгоритм для сложения но предварительно умножаем second на минус 1
+        ZNumber result;
+        result.setSign(1);
+        MUL_ZM_Z(second);
+        // Тут можно было бы вызвать функцию сложения двух целых, но в задании прописанны функции которые надо использовать
+        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){ // Если знаки одинаковы, то мы складываем их модули
+            result.setNumber(ADD_NN_N(first,second));
+            if (POZ_Z_D(first) == 2){ // Если хотя бы одно число отрицательно, то делаем отрицательным наш результат
+                MUL_ZM_Z(result);
+            }
+        }else{
+                if (COM_NN_D(ABS_Z_N(first), ABS_Z_N(second)) < 2){ //Сделаем так что бы first было больше по модолю чем second
+                result = second;     // Так как result пока нам не нужно,
+                second = first;     // и что бы не заводить новую переменную
+                first = result;    // используем её как буфер обмена
+                }
+                result.setNumber(SUB_NN_N(ABS_Z_N(first), ABS_Z_N(second)));  
+                result.setSign(first.getSign());
+            }
+        return result;
     }
 
     public static ZNumber MUL_ZZ_Z(ZNumber first, ZNumber second) {
@@ -101,7 +120,7 @@ public class ZController {
 
     public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
-        //ОН НЕ ВЕРНЫЙ!!! ПОКА...
+        //Что бы приступить к этой надо разобраться с функцией DIV так как там по моему мнению не состыковки
                 NNumber result;
         if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
            //разные знаки
