@@ -53,9 +53,9 @@ public class ZController {
         //Сложение целых чисел   
         ZNumber result;
         result.setSign(1);
-        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){
+        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){ // Если знаки одинаковы, то мы складываем их модули
             result.setNumber(ADD_NN_N(first,second));
-            if (POZ_Z_D(first) == 2){
+            if (POZ_Z_D(first) == 2){ // Если хотя бы одно число отрицательно, то делаем отрицательным наш результат
                 MUL_ZM_Z(result);
             }
         }else{
@@ -79,8 +79,8 @@ public class ZController {
         //Умножение целых чисел
         ZNumber result;
         result.setSign(1);
-        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
-            result.setSign(1);
+        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){ // Если знаки разные то у результата будет отрицательный знак
+            MUL_ZM_Z(result);
         }
         }
         result.getNumber(MUL_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
@@ -90,22 +90,24 @@ public class ZController {
 
     public static NNumber DIV_ZZ_Z(ZNumber first, NNumber second) {
         // Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
-        // Единственное что я не понимаю зачем Поздняков прописал, что к этому модолю нужен модуль добавление к натуральному числу единицы
         // И кстати, по заданию мы получаем целое и натрульное, хотя судя по названию модуля получаем два целых...
         NNumber result;
-        result.setNumber(DIV_NN_N(ABS_Z_N(first),ABS_Z_N(second)));           
+        result.setNumber(DIV_NN_N(ABS_Z_N(first),second)); 
+        if (POZ_Z_D(first) == 1){ // Если целое отрицательное то частное увеличиваем на одни (по правилам деления с остатков отрицательных)
+        result.setNumber(ADD_1N_N(result.getNumber()));
+        }
         return result;
     }
 
     public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
         //ОН НЕ ВЕРНЫЙ!!! ПОКА...
-                ZNumber result;
-        if ((POZ_Z_D(first) < 1) == (POZ_Z_D(second) < 1)){
-            result.setSign(1);
+                NNumber result;
+        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
+           //разные знаки
         }
         else{
-            result.setSign(-1);
+            //одинаковые знаки
         }
         result.getNumber(MOD_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
             
