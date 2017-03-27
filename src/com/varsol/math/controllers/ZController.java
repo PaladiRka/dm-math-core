@@ -10,6 +10,7 @@ public class ZController {
 
     public static NNumber ABS_Z_N(ZNumber number){
         //	Абсолютная величина числа, результат - натуральноe 
+        // Просто вернём натуральную составляющую числа
         return number.getNumber();
     }
 
@@ -28,12 +29,14 @@ public class ZController {
 
     public static ZNumber MUL_ZM_Z(ZNumber number){
         //Умножение целого на (-1)
+        // Умножим только знак на (-1)
         number.setSign(number.getSign()*(Integer)(-1));
         return number;
     }
 
     public static ZNumber TRANS_N_Z(NNumber number) {
         //Преобразование натурального в целое
+        //Просто создаём новое целое с положительным знаком
         ZNumber result;
         result.setNumber(number);
         result.setSign(1);
@@ -42,10 +45,11 @@ public class ZController {
 
     public static NNumber TRANS_Z_N(ZNumber number){
         //Преобразование целого неотрицательного в натуральное
+        //Проверяем знак целого
         if (number.getSign() > (Integer) 0){
-           return number.getNumber(); 
+           return number.getNumber(); //Если положителен то возвращаем его натуральную составляющую
         }else{
-        return NULL;
+        return NULL; // Если нет то возвращаем NULL
         }
     }
 
@@ -100,7 +104,6 @@ public class ZController {
         result.setSign(1);
         if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){ // Если знаки разные то у результата будет отрицательный знак
             MUL_ZM_Z(result);
-        }
         }
         result.getNumber(MUL_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
             
