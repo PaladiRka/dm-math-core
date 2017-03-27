@@ -107,29 +107,27 @@ public class ZController {
         return result;
     }
 
-    public static NNumber DIV_ZZ_Z(ZNumber first, NNumber second) {
+    public static ZNumber DIV_ZZ_Z(ZNumber first, NNumber second) {
         // Частное от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
         // И кстати, по заданию мы получаем целое и натрульное, хотя судя по названию модуля получаем два целых...
-        NNumber result;
+        ZNumber result;
         result.setNumber(DIV_NN_N(ABS_Z_N(first),second)); 
         if (POZ_Z_D(first) == 1){ // Если целое отрицательное то частное увеличиваем на одни (по правилам деления с остатков отрицательных)
-        result.setNumber(ADD_1N_N(result.getNumber()));
+            result.setNumber(ADD_1N_N(result.getNumber()));
+            result.setSign(-1); //и делаем частное отрицательным
+        } else { 
+            result.setSign(1); // иначе положительным
         }
         return result;
     }
 
-    public static NNumber MOD_ZZ_Z(ZNumber first, ZNumber second) {
+    public static NNumber MOD_ZZ_Z(ZNumber first, NNumber second) {
         //Остаток от деления большего целого числа на меньшее или равное натуральное с остатком (делитель отличен от нуля)
         //Что бы приступить к этой надо разобраться с функцией DIV так как там по моему мнению не состыковки
-                NNumber result;
-        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
-           //разные знаки
-        }
-        else{
-            //одинаковые знаки
-        }
-        result.getNumber(MOD_NN_N(ABS_Z_N(first),ABS_Z_N(second)));
-            
+        NNumber result;
+        result.getNumber(SUB_ZZ_Z(first,MUL_ZZ_Z(second,DIV_ZZ_Z(first,second))));
+        // В строке выше реализованно выражение (first-second*DIV(first,second)))
+        //где здесь нужно умножение на минус один как прописанно у Позднякова, я не знаю
         return result;
     }
 
