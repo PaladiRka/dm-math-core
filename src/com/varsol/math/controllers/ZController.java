@@ -117,6 +117,8 @@ public class ZController {
         result.setNumber(DIV_NN_N(ABS_Z_N(first),second)); 
         if (POZ_Z_D(first) == 1){ // Если целое отрицательное то частное увеличиваем на одни (по правилам деления с остатков отрицательных)
             result.setNumber(ADD_1N_N(result.getNumber()));
+        }
+        if ((POZ_Z_D(first) < 2) ^ (POZ_Z_D(second) < 2)){
             result.setSign(-1); //и делаем частное отрицательным
         } else { 
             result.setSign(1); // иначе положительным
